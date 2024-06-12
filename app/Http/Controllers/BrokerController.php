@@ -49,7 +49,9 @@ class BrokerController extends Controller
      */
     public function show(Broker $broker)
     {
-        //
+        return view('brokers.show', [
+            'broker' => $broker,
+        ]);
     }
 
     /**
@@ -67,11 +69,18 @@ class BrokerController extends Controller
      */
     public function update(UpdateBrokerRequest $request, Broker $broker)
     {
-        $broker->update($request->validated());
+        // Validate the request data
+        $validated = $request->validated();
+
+        // Generate the slug from the last name
+        $validated['slug'] = \Str::slug($validated['last_name']);
+
+        // Update the broker with the validated data
+        $broker->update($validated);
 
 
         return redirect()->route('brokers.index')
-            ->with('success', 'Broker updated successfully');
+            ->with('flash.banner', 'Broker updated successfully');
 
     }
 
@@ -80,6 +89,10 @@ class BrokerController extends Controller
      */
     public function destroy(Broker $broker)
     {
-        //
+$broker->delete();
+
+        return redirect()->route('brokers.index')
+            ->with('flash.banner', 'Broker deleted successfully');
+
     }
 }

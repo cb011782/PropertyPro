@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\BrokerController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertiesController;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::resource('agents', AgentController::class)
     ->middleware(['auth','verified']);
 
 Route::resource('brokers', BrokerController::class)
+    ->middleware(['auth','verified']);
+
+Route::resource('clients', ClientController::class)
     ->middleware(['auth','verified']);
 
 

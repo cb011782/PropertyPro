@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Agent;
 use App\Models\Broker;
+use App\Models\client;
 use App\Models\Properties;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -27,5 +28,6 @@ class DatabaseSeeder extends Seeder
         Properties::factory(10)->create();
         Agent::factory(10)->create();
         Broker::factory(10)->create();
+        Client::factory(10)->create();
     }
 }

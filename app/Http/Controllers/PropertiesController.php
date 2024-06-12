@@ -34,7 +34,7 @@ class PropertiesController extends Controller
         $validated = $request->validated();
 
         //create the slug
-        $validated['slug'] = \Str::slug($validated['last_name']);
+        $validated['slug'] = \Str::slug($validated['address']);
 
         Properties::create($validated);
 
@@ -67,14 +67,15 @@ class PropertiesController extends Controller
         $validated = $request->validated();
 
         //create the slug
-        $validated['slug'] = \Str::slug($validated['last_name']);
+        $validated['slug'] = \Str::slug($validated['address']);
 
-        Properties::update($validated);
+        $property->update($validated);
 
         return redirect()->route('properties.index')
             ->with('flash.banner', 'Property created successfully');
 
-//       dd($request->$property);
+
+//     dd($request, $property);
     }
 
     /**

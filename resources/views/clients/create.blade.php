@@ -1,14 +1,16 @@
 <x-app-layout>
+
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Create new Broker') }}
+            {{ __('Create new Client') }}
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-20 py-20">
-                <form method="POST" action="{{ route('brokers.store') }}">
+                <form method="POST" action="{{ route('clients.store') }}">
                     @csrf
                     <div class="grid grid-cols-1 gap-6">
                         <div class="mt-4">
@@ -28,8 +30,12 @@
                             <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" value="" required />
                         </div>
                         <div class="mt-4">
+                            <x-label for="address" :value="__('Address')" />
+                            <x-input id="address" class="block mt-1 w-full" type="text" name="address" value="" required />
+                        </div>
+                        <div class="mt-4">
                             <x-button class="ml-4">
-                                {{ __('Create Broker') }}
+                                {{ __('Create Client') }}
                             </x-button>
                         </div>
                     </div>
