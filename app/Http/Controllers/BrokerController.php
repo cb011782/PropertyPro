@@ -16,6 +16,8 @@ class BrokerController extends Controller
         return view('brokers.index', [
             'brokers' => Broker::all(),
         ]);
+
+
     }
 
     /**

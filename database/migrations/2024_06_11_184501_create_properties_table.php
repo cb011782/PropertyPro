@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('bedrooms');
             $table->integer('bathrooms');
             $table->string('description')->nullable();
+            $table->string('image')->nullable(); // Add this line
+
 //            $table->boolean('status')->default('true');
             $table->timestamps();
         });

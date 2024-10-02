@@ -29,6 +29,9 @@ class UpdatePropertiesRequest extends FormRequest
             'bedrooms' => 'required|numeric',
             'bathrooms' => 'required|numeric',
             'description' => 'required|string',
+            'image' => 'nullable|image',
+            'status' => 'required|string|in:available,sold,new',
+
         ];
     }
 }

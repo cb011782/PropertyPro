@@ -9,6 +9,8 @@ class Properties extends Model
 {
     use HasFactory;
 
+    protected $table = 'properties';
+
     protected $fillable = [
         'address',
         'slug',
@@ -18,8 +20,12 @@ class Properties extends Model
         'bedrooms',
         'bathrooms',
         'description',
+        'image',
+        'status',
 //        'status'
     ];
+
+
 
 
 }

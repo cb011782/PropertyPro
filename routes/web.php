@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BrokerController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PropertiesController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,9 @@ Route::get('/about', function () {
     return view('home');
 })->name('about');
 
+Route::get('/new-property', [PropertiesController::class, 'newProperties'])->name('new-property');
+
+
 
 
 
@@ -59,3 +64,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+
+
+Route::post('/appointments', [AppointmentController::class, 'store'])->name('appointments.store');
+
+Route::resource('appointments', AppointmentController::class);
+
+Route::get('/appointments/{appointment}/edit', [AppointmentController::class, 'edit'])->name('appointments.edit');
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

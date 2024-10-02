@@ -7,7 +7,7 @@
 {{--    </x-slot>--}}
 
 
-    <main class="relative">
+    <main class="relative ">
         <div class="relative h-screen bg-cover bg-center" style="background-image: url('{{ asset('images/home.jpg') }}');">
             <div class="absolute inset-0 bg-black opacity-40"></div>
             <div class="container mx-auto h-full flex items-center justify-center text-center">

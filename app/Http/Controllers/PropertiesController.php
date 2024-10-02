@@ -31,12 +31,27 @@ class PropertiesController extends Controller
      */
     public function store(StorePropertiesRequest $request)
     {
+
+
         $validated = $request->validated();
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Store the image in the public storage and add its path to the validated data
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
+
 
         //create the slug
         $validated['slug'] = \Str::slug($validated['address']);
 
+        // Store the status (default is 'new' if not specified)
+        $validated['status'] = $validated['status'] ?? 'new'; // Ensure it is set
+
+
         Properties::create($validated);
+
+
 
         return redirect()->route('properties.index')
         ->with('flash.banner', 'Property created successfully');
@@ -64,10 +79,21 @@ class PropertiesController extends Controller
      */
     public function update(UpdatePropertiesRequest $request, Properties $property)
     {
+
         $validated = $request->validated();
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('images', 'public');
+        }
 
         //create the slug
         $validated['slug'] = \Str::slug($validated['address']);
+
+
+        // Update the status
+        $validated['status'] = $validated['status'] ?? $property->status; // Keep old status if not provided
+
 
         $property->update($validated);
 
@@ -93,4 +119,21 @@ class PropertiesController extends Controller
             ->with('flash.banner', 'Property '.$model->id.' deleted successfully');
 
     }
+
+    public function newProperties()
+    {
+        $properties = Properties::orderBy('created_at', 'DESC')->paginate(20); // Fetch latest properties
+        return view('properties.new-property', compact('properties')); // Pass properties to the view
+    }
+
+    // Add this method to your PropertiesController
+    public function getTotalPropertiesCount()
+    {
+        return Properties::count(); // Get the total count of properties
+    }
+
+
+
 }
+
+
